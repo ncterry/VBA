@@ -1,0 +1,27 @@
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+' This macro displays an input box asking for user input,
+'    then shows a message box with the input provided.
+'    If the user doesn't enter anything, the message
+'    box will indicate that no input was provided.
+
+Sub GetUserInput()
+
+    Dim userInput As String
+
+    ' Display an input box and store the user input in a variable
+    userInput = InputBox("Please enter some text:", "User Input")
+
+    ' Check if the user input is not empty
+    If userInput <> "" Then
+        ' Display a message box with the user input
+        MsgBox "You entered: " & userInput, vbInformation, "User Input"
+    Else
+        ' Display a message box indicating no input was provided
+        MsgBox "No input provided.", vbExclamation, "User Input"
+    End If
+
+End Sub

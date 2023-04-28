@@ -5,13 +5,32 @@
 '*******************************************
 ' This copies cells from Sheet1 column, and transposes them to Sheet 2
 Sub CopyAndTranspose()
-    Dim ws1 As Worksheet
-    Dim ws2 As Worksheet
+
+    Dim wsSource As Worksheet
+    Dim wsDest As Worksheet
+    Dim rng1 As Range
+    Dim rng2 As Range
     
-    Set ws1 = ThisWorkbook.Worksheets("Sheet1")
-    Set ws2 = ThisWorkbook.Worksheets("Sheet2")
-    
-    ws1.Range("A1:A10").Copy
-    ws2.Cells(10, 1).PasteSpecial Paste:=xlPasteAll, Operation:=xlNone, SkipBlanks:=False, Transpose:=True
+    ' Set reference to the source sheet (the active sheet)
+    'Set wsSource = ActiveSheet
+    Set wsSource = ThisWorkbook.Worksheets("Sheet1")
+
+    ' Set reference to the destination sheet (Sheet2)
+    Set wsDest = ThisWorkbook.Worksheets("Sheet2")
+
+    ' Set references to the source ranges
+    Set rng1 = wsSource.Range("B2:B10")
+    Set rng2 = wsSource.Range("D2:D10")
+
+    ' Copy the first source range and transpose it to the destination sheet starting in cell A9
+    rng1.Copy
+    wsDest.Cells(9, 1).PasteSpecial Paste:=xlPasteAll, Operation:=xlNone, SkipBlanks:=False, Transpose:=True
+
+    ' Copy the second source range and transpose it to the destination sheet starting in cell A10
+    rng2.Copy
+    wsDest.Cells(10, 1).PasteSpecial Paste:=xlPasteAll, Operation:=xlNone, SkipBlanks:=False, Transpose:=True
+
+    ' Clear the clipboard to avoid the "marching ants" selection after copying
     Application.CutCopyMode = False
+
 End Sub

@@ -1,0 +1,30 @@
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+' This macro now places the user input in cell D16
+'   of the active sheet. If the user doesn't enter anything,
+'   the message box will indicate that no input was provided.
+
+Sub GetUserInputPlaceInD16()
+
+    Dim userInput As String
+    Dim ws As Worksheet
+
+    ' Set reference to the active sheet
+    Set ws = ActiveSheet
+
+    ' Display an input box and store the user input in a variable
+    userInput = InputBox("Please enter some text:", "User Input")
+
+    ' Check if the user input is not empty
+    If userInput <> "" Then
+        ' Place the user input in cell D16
+        ws.Cells(16, 4).Value = userInput
+    Else
+        ' Display a message box indicating no input was provided
+        MsgBox "No input provided.", vbExclamation, "User Input"
+    End If
+
+End Sub

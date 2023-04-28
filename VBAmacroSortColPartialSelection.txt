@@ -1,0 +1,51 @@
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+' This macro will sort the selected range based
+'   on the active column in ascending order,
+'   with their associated rows moving together.
+' Example: Select 10 cells in column C
+' This will sort based on those 10 cells, but will bring the full rows with it.
+
+Sub SortSelectionByActiveColumn()
+
+    Dim ws As Worksheet
+    Dim selectedRange As Range
+    Dim firstRow As Long
+    Dim lastRow As Long
+    Dim activeCol As Range
+    Dim sortOrder As Long
+
+    ' Set reference to the active sheet
+    Set ws = ActiveSheet
+
+    ' Set reference to the selected range
+    Set selectedRange = Selection
+
+    ' Find the first and last row of the selected range
+    firstRow = selectedRange.Cells(1, 1).Row
+    lastRow = selectedRange.Cells(selectedRange.Rows.count, 1).Row
+
+    ' Set reference to the active column within the selected range
+    Set activeCol = ActiveCell.EntireColumn
+
+    ' Set the sort order to ascending
+    sortOrder = xlAscending
+
+    ' Apply the sort
+    With ws.Sort
+        .SortFields.Clear
+        .SortFields.Add Key:=activeCol.Cells(firstRow, 1).Resize(lastRow - firstRow + 1, 1), _
+            SortOn:=xlSortOnValues, Order:=sortOrder, DataOption:=xlSortNormal
+        .SetRange ws.Rows(firstRow & ":" & lastRow)
+        .Header = xlNo
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+
+End Sub
+

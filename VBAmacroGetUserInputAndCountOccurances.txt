@@ -1,0 +1,46 @@
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+' This macro now searches the entire sheet for the user
+'   input and displays the count of occurrences in a message box.
+'   If the user doesn't enter anything, the message box
+'   will indicate that no input was provided.
+' This is case insensitive and will not matter if text is around the search item
+
+Sub GetUserInputCountOccurrences()
+
+    Dim userInput As String
+    Dim ws As Worksheet
+    Dim cell As Range
+    Dim count As Long
+
+    ' Set reference to the active sheet
+    Set ws = ActiveSheet
+
+    ' Display an input box and store the user input in a variable
+    userInput = InputBox("Please enter the text you want to search for:", "User Input")
+
+    ' Check if the user input is not empty
+    If userInput <> "" Then
+        ' Initialize the count
+        count = 0
+
+        ' Loop through all cells in the used range of the active sheet
+        For Each cell In ws.UsedRange
+            ' Check if the cell value contains the user input (case-insensitive)
+            If InStr(1, cell.Value, userInput, vbTextCompare) > 0 Then
+                ' Increment the count
+                count = count + 1
+            End If
+        Next cell
+
+        ' Display a message box with the count of occurrences
+        MsgBox "Occurrences of '" & userInput & "': " & count, vbInformation, "Search Results"
+    Else
+        ' Display a message box indicating no input was provided
+        MsgBox "No input provided.", vbExclamation, "User Input"
+    End If
+
+End Sub
