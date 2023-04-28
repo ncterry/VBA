@@ -1,0 +1,24 @@
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'This code defines a subroutine called CreateMacroSheet.
+'The subroutine checks if a worksheet named "MacroSheet" already
+'  exists. If it doesn't exist, the subroutine creates a new
+'  worksheet and names it "MacroSheet".
+
+Sub CreateMacroSheet()
+    Dim ws As Worksheet
+    On Error Resume Next
+    Set ws = Worksheets("MacroSheet")
+    On Error GoTo 0
+
+    If ws Is Nothing Then
+        Set ws = Worksheets.Add
+        ws.Name = "MacroSheet"
+        MsgBox "New sheet 'MacroSheet' has been created."
+    Else
+        MsgBox "Sheet 'MacroSheet' already exists."
+    End If
+End Sub

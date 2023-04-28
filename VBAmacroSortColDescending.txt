@@ -1,0 +1,46 @@
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+' This sorts a column in ascending order
+' This sorts all rows based on the column that a user is in
+' The rows always stay together
+' Create a button, in Column C (or any column)
+' Place your cursor in any column
+' Click the button, and it will sort all rows,
+'    based on the column selected
+
+Sub SortByActiveColumnAscending()
+
+    Dim ws As Worksheet
+    Dim activeCol As Range
+    Dim lastRow As Long
+    Dim sortOrder As Long
+
+    ' Set reference to the active sheet
+    Set ws = ActiveSheet
+
+    ' Set reference to the active column
+    Set activeCol = ActiveCell.EntireColumn
+
+    ' Find the last row with data in the active column
+    lastRow = ws.Cells(ws.Rows.Count, activeCol.Column).End(xlUp).Row
+
+    ' Set the sort order to ascending
+    sortOrder = xlAscending
+
+    ' Apply the sort
+    With ws.Sort
+        .SortFields.Clear
+        .SortFields.Add Key:=activeCol.Cells(1, 1).Resize(lastRow, 1), _
+            SortOn:=xlSortOnValues, Order:=sortOrder, DataOption:=xlSortNormal
+        .SetRange ws.Cells(1, 1).Resize(lastRow, ws.UsedRange.Columns.Count)
+        .Header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+
+End Sub

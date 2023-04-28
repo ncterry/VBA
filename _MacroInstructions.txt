@@ -1,0 +1,37 @@
+Here is the basic instructions on creating a macro, and linking it to a button.
+
+How would you create a macro using VBA on an excel worksheet to create a button that when pressed, uses that macro to copy Cells A1:A10 on Sheet1 and transpose them to Sheet2 starting in Column 1, row 10 
+
+ 
+
+To create a macro using VBA in Excel to copy cells A1:A10 on Sheet1 and transpose them to Sheet2 starting in Column 1, row 10, follow these steps: 
+
+1) Open your Excel workbook and press Alt+F11 to open the Visual Basic for Applications (VBA) editor. 
+
+2) In the VBA editor, click on "Insert" in the menu, and then select "Module" to insert a new module. 
+
+3) In the newly created module, paste the following VBA code: 
+
+ 
+
+Vba CODE 
+
+ 
+
+4) Press Ctrl+S to save the workbook (preferably as a macro-enabled workbook, i.e., with a .xlsm file extension). 
+
+5) Now, you need to create a button that will execute this macro: 
+
+6) Go to the "Developer" tab in Excel. If you don't see this tab, you'll need to enable it by going to "File" > "Options" > "Customize Ribbon" and checking the "Developer" checkbox. 
+
+7) Click on "Insert" in the "Controls" group and select the "Form Controls" > "Button" option. 
+
+8) Draw the button on your worksheet by clicking and dragging on the desired location. 
+
+9) In the "Assign Macro" dialog that appears, select the "CopyAndTranspose" macro and click "OK". 
+
+10) Optionally, you can right-click on the button to edit its caption. 
+
+11) Now, when you press the button, the macro will copy cells A1:A10 from Sheet1 and transpose them to Sheet2 starting in Column 1, row 10. 
+
+ 

@@ -1,0 +1,17 @@
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+' This copies cells from Sheet1 column, and transposes them to Sheet 2
+Sub CopyAndTranspose()
+    Dim ws1 As Worksheet
+    Dim ws2 As Worksheet
+    
+    Set ws1 = ThisWorkbook.Worksheets("Sheet1")
+    Set ws2 = ThisWorkbook.Worksheets("Sheet2")
+    
+    ws1.Range("A1:A10").Copy
+    ws2.Cells(10, 1).PasteSpecial Paste:=xlPasteAll, Operation:=xlNone, SkipBlanks:=False, Transpose:=True
+    Application.CutCopyMode = False
+End Sub

@@ -1,0 +1,45 @@
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+' This macro will sort the entire sheet based on the active
+'    column in descending order, starting from row 3
+'    and keeping all rows intact.
+Sub SortByActiveColumnDescendingFromRow3()
+
+    Dim ws As Worksheet
+    Dim activeCol As Range
+    Dim lastRow As Long
+    Dim sortOrder As Long
+    Dim startRow As Long
+
+    ' Set reference to the active sheet
+    Set ws = ActiveSheet
+
+    ' Set reference to the active column
+    Set activeCol = ActiveCell.EntireColumn
+
+    ' Find the last row with data in the active column
+    lastRow = ws.Cells(ws.Rows.count, activeCol.Column).End(xlUp).Row
+
+    ' Set the sort order to descending
+    sortOrder = xlDescending
+
+    ' Set the starting row for sorting
+    startRow = 3
+
+    ' Apply the sort
+    With ws.Sort
+        .SortFields.Clear
+        .SortFields.Add Key:=activeCol.Cells(startRow, 1).Resize(lastRow - startRow + 1, 1), _
+            SortOn:=xlSortOnValues, Order:=sortOrder, DataOption:=xlSortNormal
+        .SetRange ws.Cells(startRow, 1).Resize(lastRow - startRow + 1, ws.UsedRange.Columns.count)
+        .Header = xlNo
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+
+End Sub

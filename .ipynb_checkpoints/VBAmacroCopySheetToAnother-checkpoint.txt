@@ -1,0 +1,25 @@
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'*******************************************
+'The macro will copy all data from the source sheet
+'   to the target sheet, replacing any existing data
+'   on the target sheet.
+Sub CopyAllData()
+    Dim sourceSheet As Worksheet
+    Dim targetSheet As Worksheet
+
+    ' Set the source and target sheets
+    Set sourceSheet = ThisWorkbook.Worksheets("Sheet1")
+    Set targetSheet = ThisWorkbook.Worksheets("MacroSheet")
+
+    ' Clear any existing data on the target sheet
+    targetSheet.Cells.ClearContents
+
+    ' Copy all data from the source sheet to the target sheet
+    sourceSheet.Cells.Copy Destination:=targetSheet.Cells
+
+    ' Inform the user that the data has been copied
+    MsgBox "All data has been copied from " & sourceSheet.Name & " to " & targetSheet.Name
+End Sub
