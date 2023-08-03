@@ -1,0 +1,119 @@
+This is a selective task that we know before.....
+An email is received with intended format
+Click in email in outlook, Select All, Copy
+Paste into Cell A1, in Sheet 'Input'
+If the macro is enabled, run it.
+----------------------------------------------
+----------------------------------------------
+----------------------------------------------
+Sub GatherVolunteerFromEmail()
+    Dim wsInput As Worksheet
+    Dim wsVolunteers As Worksheet
+    Dim EmptyCol As Long
+    Dim inputRange As Range
+    Dim volunteerRange As Range
+    
+    ' Set references to "Input" and "Volunteers" sheets
+    Set wsInput = ThisWorkbook.Sheets("Input")
+    Set wsVolunteers = ThisWorkbook.Sheets("Volunteers")
+    
+    ' Set the initial column in "Volunteers" to copy the data
+    EmptyCol = 1
+    
+    ' Copy data from Input to Volunteers sheet
+    wsVolunteers.Cells(1, EmptyCol).Value = wsInput.Cells(9, "A").Value
+    wsVolunteers.Cells(2, EmptyCol).Value = wsInput.Cells(9, "B").Value
+    wsVolunteers.Cells(3, EmptyCol).Value = wsInput.Cells(9, "C").Value
+    wsVolunteers.Cells(4, EmptyCol).Value = wsInput.Cells(11, "A").Value
+    wsVolunteers.Cells(5, EmptyCol).Value = wsInput.Cells(11, "B").Value
+    wsVolunteers.Cells(6, EmptyCol).Value = wsInput.Cells(13, "A").Value
+    wsVolunteers.Cells(13, EmptyCol).Value = wsInput.Cells(15, "A").Value
+    wsVolunteers.Cells(28, EmptyCol).Value = wsInput.Cells(17, "A").Value
+    
+    ' Move to the next empty column
+    EmptyCol = wsVolunteers.Cells(1, wsVolunteers.Columns.Count).End(xlToLeft).Column + 1
+    
+    ' Copy data from Input to Volunteers sheet (second set of data)
+    wsVolunteers.Cells(1, EmptyCol).Value = wsInput.Cells(10, "A").Value
+    wsVolunteers.Cells(2, EmptyCol).Value = wsInput.Cells(10, "B").Value
+    wsVolunteers.Cells(3, EmptyCol).Value = wsInput.Cells(10, "C").Value
+    wsVolunteers.Cells(4, EmptyCol).Value = wsInput.Cells(12, "A").Value
+    wsVolunteers.Cells(5, EmptyCol).Value = wsInput.Cells(12, "B").Value
+    
+    ' Split and copy data from Input(14A) to Volunteers sheet
+    Set inputRange = wsInput.Cells(14, "A")
+    Set volunteerRange = wsVolunteers.Cells(6, EmptyCol)
+    SplitAndCopyData inputRange, volunteerRange
+    
+    ' Split and copy data from Input(16A) to Volunteers sheet
+    Set inputRange = wsInput.Cells(16, "A")
+    Set volunteerRange = wsVolunteers.Cells(13, EmptyCol)
+    SplitAndCopyData inputRange, volunteerRange
+    
+    ' Split and copy data from Input(18A) to Volunteers sheet
+    Set inputRange = wsInput.Cells(18, "A")
+    Set volunteerRange = wsVolunteers.Cells(28, EmptyCol)
+    SplitAndCopyData inputRange, volunteerRange
+End Sub
+
+Sub SplitAndCopyData(inputRange As Range, volunteerRange As Range)
+    Dim valuesArray As Variant
+    Dim i As Long
+    
+    ' Split the values separated by a comma and copy them to the volunteerRange
+    valuesArray = Split(inputRange.Value, ",")
+    For i = 0 To UBound(valuesArray)
+        volunteerRange.Offset(i, 0).Value = Trim(valuesArray(i))
+    Next i
+End Sub
+----------------------------------------------
+----------------------------------------------
+----------------------------------------------
+
+Below is the VBA macro code that clears all text from the "Input" sheet:
+
+
+Sub ClearInputSheet()
+
+    Dim wsInput As Worksheet
+
+    Set wsInput = ThisWorkbook.Sheets("Input")
+
+    wsInput.Cells.ClearContents
+
+End Sub
+----------------------------------------------
+----------------------------------------------
+----------------------------------------------
+To add a button in Excel and assign a macro to it, follow these steps:
+
+Step 1: Enable the Developer Tab
+
+Click on "File" in the top-left corner of Excel.
+Go to "Options."
+In the Excel Options window, select "Customize Ribbon."
+In the right pane, check the "Developer" checkbox under the "Main Tabs" section.
+Click "OK" to apply the changes.
+Step 2: Insert the Button
+
+Go to the "Developer" tab, which should now be visible on the Excel ribbon.
+Click on the "Insert" drop-down arrow in the "Controls" group.
+Under "Form Controls," choose "Button" (it looks like a rectangle).
+Click and drag on the worksheet to create the button's shape and size.
+Step 3: Assign the Macro to the Button
+
+Right-click on the button you just created, and select "Assign Macro."
+In the "Assign Macro" dialog box, you will see a list of available macros in your workbook.
+Choose the macro you want to assign to the button and click "OK."
+Step 4: Edit Button Text (Optional)
+
+Right-click on the button again, and select "Edit Text."
+You can now change the text that appears on the button (default text is "Button 1") to a more descriptive label for your macro.
+Step 5: Test the Button
+
+Click on the button you added, and it will execute the assigned macro.
+Your button is now added to the worksheet and linked to the specified macro. You can move and resize the button as needed. If you want to edit or remove the button later, simply right-click on it and choose the appropriate option.
+
+Please note that the steps described above are based on Microsoft Excel 2016 and later versions. If you are using an older version of Excel, the process may be slightly different, but the general idea remains the same.
+
+
